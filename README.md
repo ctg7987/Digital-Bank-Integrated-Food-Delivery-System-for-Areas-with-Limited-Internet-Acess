@@ -1,5 +1,11 @@
 # USSD-Based Food Delivery System
 
+<div align="center">
+  <img src="ussd-mobile-interface-demo.png" alt="USSD Mobile Interface Demo" width="300"/>
+  <br>
+  <em>iPhone 16-styled mobile interface for USSD food delivery</em>
+</div>
+
 A C++ implementation of a food delivery system that operates without internet access, using USSD (Unstructured Supplementary Service Data) technology to serve regions with limited connectivity.
 
 ## 📋 Table of Contents
