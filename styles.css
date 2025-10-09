@@ -18,18 +18,33 @@ body {
 /* iPhone 16 Container */
 .phone-container {
     perspective: 1000px;
+    animation: phoneFloat 6s ease-in-out infinite;
+}
+
+@keyframes phoneFloat {
+    0%, 100% { transform: translateY(0px) rotateX(0deg); }
+    50% { transform: translateY(-10px) rotateX(2deg); }
 }
 
 .iphone-frame {
     width: 390px;
     height: 844px;
-    background: #1c1c1e;
+    background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
     border-radius: 55px;
     padding: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.iphone-frame:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.15);
 }
 
 /* Dynamic Island */
@@ -40,10 +55,24 @@ body {
     transform: translateX(-50%);
     width: 126px;
     height: 37px;
-    background: #000;
+    background: linear-gradient(145deg, #1a1a1a, #000);
     border-radius: 20px;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    animation: dynamicIslandPulse 3s ease-in-out infinite;
+}
+
+@keyframes dynamicIslandPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    }
+    50% { 
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(255, 255, 255, 0.1),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+    }
 }
 
 /* Status Bar */
@@ -142,6 +171,12 @@ body {
 .dial-btn:active {
     transform: scale(0.95);
     background: #e5e5e7;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dial-btn:hover {
+    background: #f8f8f8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .dial-btn .number {
@@ -355,6 +390,66 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Loading States */
+.processing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.processing .loading {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+}
+
+.processing-text {
+    color: #007aff;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Connection Status */
+.connection-status {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 999;
+    animation: statusSlideIn 0.3s ease-out;
+}
+
+@keyframes statusSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.connection-status.backend {
+    background: #34c759;
+    color: white;
+}
+
+.connection-status.simulation {
+    background: #ff9500;
+    color: white;
+}
+
+.connection-status.error {
+    background: #ff3b30;
+    color: white;
 }
 
 /* Scrollbar Styling */

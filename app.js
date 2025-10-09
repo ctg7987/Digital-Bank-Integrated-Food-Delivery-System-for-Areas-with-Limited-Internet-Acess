@@ -1,11 +1,14 @@
 // USSD Food Delivery System - Frontend Logic
-// Simulates the C++ backend behavior
+// Connects to C++ backend via HTTP API
 
 class FoodDeliverySystem {
     constructor() {
         this.state = 'INIT';
         this.currentRestaurant = null;
         this.currentOrder = [];
+        this.sessionId = this.generateSessionId();
+        this.apiEndpoint = 'http://localhost:8080/api/ussd';
+        this.useBackend = true; // Set to false to use simulation
         this.restaurants = [
             {
                 id: 1,
@@ -161,7 +164,76 @@ class FoodDeliverySystem {
         ];
     }
 
-    processInput(input) {
+    generateSessionId() {
+        return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    async processInput(input) {
+        if (this.useBackend) {
+            return await this.processWithBackend(input);
+        } else {
+            return this.processLocally(input);
+        }
+    }
+
+    async processWithBackend(input) {
+        try {
+            this.showConnectionStatus('backend', 'Backend Connected');
+            
+            const response = await fetch(this.apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sessionId: this.sessionId,
+                    input: input
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Backend connection error:', error);
+            this.showConnectionStatus('error', 'Connection Error');
+            // Fallback to local processing
+            console.log('Falling back to local simulation...');
+            this.showConnectionStatus('simulation', 'Local Simulation');
+            return this.processLocally(input);
+        }
+    }
+
+    showConnectionStatus(type, message) {
+        // Remove existing status
+        const existingStatus = document.querySelector('.connection-status');
+        if (existingStatus) {
+            existingStatus.remove();
+        }
+
+        // Create new status
+        const status = document.createElement('div');
+        status.className = `connection-status ${type}`;
+        status.textContent = message;
+        
+        // Add to screen
+        const screen = document.querySelector('.screen');
+        if (screen) {
+            screen.appendChild(status);
+        }
+
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            if (status.parentNode) {
+                status.remove();
+            }
+        }, 3000);
+    }
+
+    processLocally(input) {
         switch (this.state) {
             case 'INIT':
                 if (input === '*0101#') {
@@ -339,15 +411,22 @@ function dialClear() {
     document.getElementById('dialInput').value = '';
 }
 
-function dialCall() {
+async function dialCall() {
     if (currentInput.trim()) {
         // Switch to USSD screen
         document.getElementById('dialScreen').classList.remove('active');
         document.getElementById('ussdScreen').classList.add('active');
         
-        // Process the USSD code
-        const result = foodDeliverySystem.processInput(currentInput);
-        displayUSSDMessage(result.message, result.prompt);
+        // Show loading state
+        displayUSSDMessage("Processing...", false);
+        
+        try {
+            // Process the USSD code
+            const result = await foodDeliverySystem.processInput(currentInput);
+            displayUSSDMessage(result.message, result.prompt);
+        } catch (error) {
+            displayUSSDMessage("Connection error. Please try again.", true);
+        }
         
         // Clear dial input
         currentInput = '';
@@ -355,12 +434,24 @@ function dialCall() {
     }
 }
 
-function sendUSSD() {
+async function sendUSSD() {
     const input = document.getElementById('ussdInput').value.trim();
     if (input) {
-        const result = foodDeliverySystem.processInput(input);
-        displayUSSDMessage(result.message, result.prompt);
-        document.getElementById('ussdInput').value = '';
+        // Show loading state
+        const inputArea = document.querySelector('.ussd-input-area');
+        const actions = document.querySelector('.ussd-actions');
+        inputArea.style.display = 'none';
+        actions.style.display = 'none';
+        
+        displayUSSDMessage("Processing...", false);
+        
+        try {
+            const result = await foodDeliverySystem.processInput(input);
+            displayUSSDMessage(result.message, result.prompt);
+            document.getElementById('ussdInput').value = '';
+        } catch (error) {
+            displayUSSDMessage("Connection error. Please try again.", true);
+        }
     }
 }
 
@@ -368,10 +459,21 @@ function displayUSSDMessage(message, showInput) {
     const ussdContent = document.getElementById('ussdContent');
     ussdContent.innerHTML = '';
     
-    const messageElement = document.createElement('p');
-    messageElement.className = 'ussd-message';
-    messageElement.textContent = message;
-    ussdContent.appendChild(messageElement);
+    // Check if it's a processing message
+    if (message === "Processing...") {
+        const processingDiv = document.createElement('div');
+        processingDiv.className = 'processing';
+        processingDiv.innerHTML = `
+            <div class="loading"></div>
+            <div class="processing-text">Processing...</div>
+        `;
+        ussdContent.appendChild(processingDiv);
+    } else {
+        const messageElement = document.createElement('p');
+        messageElement.className = 'ussd-message';
+        messageElement.textContent = message;
+        ussdContent.appendChild(messageElement);
+    }
     
     // Show or hide input area
     const inputArea = document.querySelector('.ussd-input-area');
@@ -380,7 +482,10 @@ function displayUSSDMessage(message, showInput) {
     if (showInput) {
         inputArea.style.display = 'block';
         actions.style.display = 'flex';
-        document.getElementById('ussdInput').focus();
+        // Small delay to ensure smooth transition
+        setTimeout(() => {
+            document.getElementById('ussdInput').focus();
+        }, 300);
     } else {
         inputArea.style.display = 'none';
         actions.style.display = 'none';
