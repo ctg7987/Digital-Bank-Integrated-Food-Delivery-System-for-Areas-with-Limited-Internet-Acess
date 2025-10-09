@@ -8,37 +8,37 @@
 
 A C++ implementation of a food delivery system that operates without internet access, using USSD (Unstructured Supplementary Service Data) technology to serve regions with limited connectivity.
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [🍽️ Overview](#-overview)
-- [🚀 Features](#-features)
-- [🏗️ System Architecture](#️-system-architecture)
-- [🛠️ Object-Oriented Programming Concepts](#️-object-oriented-programming-concepts)
-- [📋 Prerequisites](#-prerequisites)
-- [🔧 Building and Running](#-building-and-running)
-- [🎯 Usage](#-usage)
-- [🎬 Demo](#-demo)
-- [📊 System Architecture Flow](#-system-architecture-flow)
-- [🏪 Featured Restaurants](#-featured-restaurants)
-- [💳 Payment Integration](#-payment-integration)
-- [🔒 Security Features](#-security-features)
-- [📁 Project Structure](#-project-structure)
-- [🌍 Real-World Impact](#-real-world-impact)
-- [🔮 Future Enhancements](#-future-enhancements)
-- [🛠️ Technical Implementation Details](#️-technical-implementation-details)
-- [📱 Mobile Integration](#-mobile-integration)
-- [👨‍💻 Author](#-author)
-- [📄 License](#-license)
-- [🤝 Contributing](#-contributing)
-- [📚 References](#-references)
+- [Overview](#overview)
+- [Features](#features)
+- [System Architecture](#system-architecture)
+- [Object-Oriented Programming Concepts](#object-oriented-programming-concepts)
+- [Prerequisites](#prerequisites)
+- [Building and Running](#building-and-running)
+- [Usage](#usage)
+- [Demo](#demo)
+- [System Architecture Flow](#system-architecture-flow)
+- [Featured Restaurants](#featured-restaurants)
+- [Payment Integration](#payment-integration)
+- [Security Features](#security-features)
+- [Project Structure](#project-structure)
+- [Real-World Impact](#real-world-impact)
+- [Future Enhancements](#future-enhancements)
+- [Technical Implementation Details](#technical-implementation-details)
+- [Mobile Integration](#mobile-integration)
+- [Author](#author)
+- [License](#license)
+- [Contributing](#contributing)
+- [References](#references)
 
-## 🍽️ Overview
+## Overview
 
 This project addresses the digital divide by bringing modern food delivery convenience to underserved regions without reliable internet access. The system allows users to browse restaurant menus, place orders, and make payments through a simple USSD interface, making food delivery accessible to communities previously left behind by digital advancements.
 
-## 🚀 Features
+## Features
 
-- **📱 Mobile Web Interface**: Beautiful iPhone 16-styled UI for interactive demos
+- **Mobile Web Interface**: Beautiful iPhone 16-styled UI for interactive demos
 - **Internet-Free Operation**: Uses USSD technology for connectivity
 - **Multiple Payment Methods**: Supports Visa Card, EcoCash, and Payment on Delivery
 - **Restaurant Management**: Easy addition and management of restaurants and menu items
@@ -47,7 +47,7 @@ This project addresses the digital divide by bringing modern food delivery conve
 - **Local Integration**: Designed for Zimbabwe with EcoCash payment support
 - **Dual Interface**: Both command-line (C++) and web interface (HTML/CSS/JS)
 
-## 🏗️ System Architecture
+## System Architecture
 
 The system is built using four core classes:
 
@@ -56,7 +56,7 @@ The system is built using four core classes:
 - **`Order`**: Handles order placement, processing, and tracking
 - **`USSDSystem`**: Main controller for user interaction and system coordination
 
-## 🛠️ Object-Oriented Programming Concepts
+## Object-Oriented Programming Concepts
 
 ### Implemented OOP Principles:
 - **Classes and Objects**: Modular design with clear separation of concerns
@@ -70,14 +70,14 @@ The system is built using four core classes:
 - **STL Vectors**: Dynamic memory management for scalable data handling
 - **Friend Functions**: Enhanced output formatting and data access
 
-## 📋 Prerequisites
+## Prerequisites
 
 - C++11 or later compiler
 - Make utility (for building with makefile)
 
-## 🔧 Building and Running
+## Building and Running
 
-### Option 1: Web Interface (Recommended for Demo) 📱
+### Option 1: Web Interface (Recommended for Demo)
 
 Experience the system with a beautiful iPhone 16-styled mobile interface:
 
@@ -90,7 +90,7 @@ python3 -m http.server 8000
 # Then navigate to: http://localhost:8000
 ```
 
-> 📖 **Full Guide**: See [WEB_INTERFACE.md](WEB_INTERFACE.md) for complete web interface documentation.
+> **Full Guide**: See [WEB_INTERFACE.md](WEB_INTERFACE.md) for complete web interface documentation.
 
 ### Option 2: Command Line (C++ Backend)
 
@@ -111,7 +111,7 @@ make clean
 g++ -std=c++11 -Wall -Werror -o food_delivery main.cpp MenuItem.cpp Restaurant.cpp Order.cpp USSDSystem.cpp
 ```
 
-## 🎯 Usage
+## Usage
 
 1. **Run the program**: Execute the compiled binary
 2. **Select Restaurant**: Choose from available restaurants in Harare
@@ -120,7 +120,7 @@ g++ -std=c++11 -Wall -Werror -o food_delivery main.cpp MenuItem.cpp Restaurant.c
 5. **Choose Payment**: Select from Visa Card, EcoCash, or Payment on Delivery
 6. **Track Order**: Monitor order status from placement to delivery
 
-## 🎬 Demo
+## Demo
 
 ### Quick Start Demo
 ```bash
@@ -133,7 +133,7 @@ make
 ./food_delivery
 ```
 
-> 📖 **Detailed Demo Guide**: See [demo.md](demo.md) for a complete walkthrough with sample interactions and all payment methods.
+> **Detailed Demo Guide**: See [demo.md](demo.md) for a complete walkthrough with sample interactions and all payment methods.
 
 ### Sample User Interaction Flow
 
@@ -199,13 +199,13 @@ Please enter your EcoCash PIN: ****
 Thank you for using USSD Food Delivery!
 ```
 
-## 📊 System Architecture Flow
+## System Architecture Flow
 
 ![System Architecture](https://github.com/user-attachments/assets/ab6c10c4-ab3f-4fdb-be47-11953e4cdbde)
 
 *This flowchart illustrates the complete user journey from USSD access to order delivery, showing the seamless interaction between system components.*
 
-## 🏪 Featured Restaurants
+## Featured Restaurants
 
 The system includes 10 popular restaurants in Harare:
 
@@ -220,19 +220,19 @@ The system includes 10 popular restaurants in Harare:
 - Gava's (Traditional Zimbabwean)
 - Sabai Thai (Thai Cuisine)
 
-## 💳 Payment Integration
+## Payment Integration
 
 - **Visa Card**: Traditional card payments
 - **EcoCash**: Mobile money integration for Zimbabwe
 - **Payment on Delivery**: Cash payment upon delivery
 
-## 🔒 Security Features
+## Security Features
 
 - Input validation and error handling
 - Limited retry attempts for security
 - Exception handling for robust operation
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 food-delivery-system/
@@ -257,7 +257,7 @@ food-delivery-system/
     └── *.o                   # Object files
 ```
 
-## 🌍 Real-World Impact
+## Real-World Impact
 
 This system demonstrates how technology can bridge the digital divide by:
 - Providing food delivery services to underserved communities
@@ -265,7 +265,7 @@ This system demonstrates how technology can bridge the digital divide by:
 - Using existing mobile infrastructure (USSD)
 - Promoting financial inclusion in developing regions
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - Database integration for user management
 - Real-time order tracking system
@@ -278,7 +278,7 @@ This system demonstrates how technology can bridge the digital divide by:
 - Loyalty program integration
 - Multi-currency support for regional expansion
 
-## 🛠️ Technical Implementation Details
+## Technical Implementation Details
 
 ### Key Code Examples
 
@@ -307,7 +307,7 @@ order.calculateTotal();
 - **Template Functions**: Type-safe comparisons for price sorting
 - **Exception Handling**: Robust error management for production use
 
-## 📱 Mobile Integration
+## Mobile Integration
 
 The system is designed to work seamlessly with:
 - **USSD Short Codes**: Easy access via mobile keypad
@@ -315,22 +315,22 @@ The system is designed to work seamlessly with:
 - **SMS Notifications**: Order updates via text messages
 - **Feature Phone Support**: Works on basic mobile devices
 
-## 👨‍💻 Author
+## Author
 
 **Calvin Gutsa**
 - Version: 1.0
 - Created: October 5, 2022
 - Focus: Bridging digital divide through innovative USSD solutions
 
-## 📄 License
+## License
 
 This project is part of an academic demonstration of object-oriented programming principles and real-world problem solving.
 
-## 🤝 Contributing
+## Contributing
 
 This project serves as an educational example of applying OOP concepts to solve real-world challenges. Contributions that enhance the system's functionality or documentation are welcome.
 
-## 📚 References
+## References
 
 - Mobile Money Research and Development in Zimbabwe
 - USSD Technology Implementation
@@ -339,4 +339,4 @@ This project serves as an educational example of applying OOP concepts to solve 
 
 ---
 
-*Built with ❤️ to serve communities beyond the digital divide*
+*Built to serve communities beyond the digital divide*
