@@ -1,0 +1,383 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* iPhone 16 Container */
+.phone-container {
+    perspective: 1000px;
+}
+
+.iphone-frame {
+    width: 390px;
+    height: 844px;
+    background: #1c1c1e;
+    border-radius: 55px;
+    padding: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dynamic Island */
+.dynamic-island {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 37px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Status Bar */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 58px 20px 10px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+    z-index: 999;
+}
+
+.status-right {
+    display: flex;
+    gap: 5px;
+}
+
+/* Screen */
+.screen {
+    background: #fff;
+    height: calc(100% - 68px);
+    border-radius: 43px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Home Indicator */
+.home-indicator {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* Dial Screen */
+.dial-screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    background: #f5f5f7;
+}
+
+.dial-screen.active {
+    display: flex;
+}
+
+.dial-display {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.dial-input {
+    border: none;
+    background: transparent;
+    font-size: 32px;
+    font-weight: 300;
+    text-align: center;
+    width: 100%;
+    color: #1c1c1e;
+    letter-spacing: 2px;
+}
+
+.dial-input:focus {
+    outline: none;
+}
+
+.dial-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+    flex: 1;
+}
+
+.dial-btn {
+    aspect-ratio: 1;
+    border: none;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dial-btn:active {
+    transform: scale(0.95);
+    background: #e5e5e7;
+}
+
+.dial-btn .number {
+    font-size: 32px;
+    font-weight: 300;
+    color: #1c1c1e;
+}
+
+.dial-btn .letters {
+    font-size: 10px;
+    color: #86868b;
+    margin-top: -5px;
+    letter-spacing: 1px;
+}
+
+.dial-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
+}
+
+.action-btn {
+    width: 65px;
+    height: 65px;
+    border: none;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn .icon {
+    font-size: 24px;
+}
+
+.call-btn {
+    background: #34c759;
+    width: 75px;
+    height: 75px;
+}
+
+.call-btn .icon {
+    font-size: 28px;
+    filter: brightness(0) invert(1);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+/* USSD Screen */
+.ussd-screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+}
+
+.ussd-screen.active {
+    display: flex;
+}
+
+.ussd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f5f5f7;
+    border-bottom: 1px solid #d1d1d6;
+}
+
+.ussd-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1c1c1e;
+}
+
+.close-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #e5e5e7;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    color: #86868b;
+    transition: all 0.2s;
+}
+
+.close-btn:active {
+    background: #d1d1d6;
+}
+
+.ussd-content {
+    flex: 1;
+    padding: 30px 20px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.ussd-message {
+    font-size: 16px;
+    color: #1c1c1e;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.ussd-prompt {
+    font-size: 15px;
+    color: #3a3a3c;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.ussd-menu-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f7;
+    font-size: 15px;
+    color: #1c1c1e;
+    line-height: 1.4;
+}
+
+.ussd-input-area {
+    padding: 20px;
+    background: #f5f5f7;
+    border-top: 1px solid #d1d1d6;
+}
+
+.ussd-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d1d1d6;
+    border-radius: 12px;
+    font-size: 18px;
+    text-align: center;
+    background: #fff;
+    color: #1c1c1e;
+}
+
+.ussd-input:focus {
+    outline: none;
+    border-color: #007aff;
+}
+
+.ussd-actions {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    background: #fff;
+}
+
+.ussd-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-btn {
+    background: #f5f5f7;
+    color: #ff3b30;
+}
+
+.send-btn {
+    background: #007aff;
+    color: #fff;
+}
+
+.ussd-btn:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ussd-content > * {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007aff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scrollbar Styling */
+.ussd-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ussd-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ussd-content::-webkit-scrollbar-thumb {
+    background: #d1d1d6;
+    border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 430px) {
+    .iphone-frame {
+        width: 100%;
+        max-width: 390px;
+        height: auto;
+        min-height: 844px;
+    }
+}
+

@@ -32,12 +32,14 @@ This project addresses the digital divide by bringing modern food delivery conve
 
 ## 🚀 Features
 
+- **📱 Mobile Web Interface**: Beautiful iPhone 16-styled UI for interactive demos
 - **Internet-Free Operation**: Uses USSD technology for connectivity
 - **Multiple Payment Methods**: Supports Visa Card, EcoCash, and Payment on Delivery
 - **Restaurant Management**: Easy addition and management of restaurants and menu items
 - **Order Tracking**: Real-time order status updates
 - **Object-Oriented Design**: Clean, maintainable C++ architecture
 - **Local Integration**: Designed for Zimbabwe with EcoCash payment support
+- **Dual Interface**: Both command-line (C++) and web interface (HTML/CSS/JS)
 
 ## 🏗️ System Architecture
 
@@ -69,7 +71,24 @@ The system is built using four core classes:
 
 ## 🔧 Building and Running
 
-### Using Makefile:
+### Option 1: Web Interface (Recommended for Demo) 📱
+
+Experience the system with a beautiful iPhone 16-styled mobile interface:
+
+```bash
+# Simply open in your browser
+open index.html
+
+# Or use a local server
+python3 -m http.server 8000
+# Then navigate to: http://localhost:8000
+```
+
+> 📖 **Full Guide**: See [WEB_INTERFACE.md](WEB_INTERFACE.md) for complete web interface documentation.
+
+### Option 2: Command Line (C++ Backend)
+
+#### Using Makefile:
 ```bash
 # Compile the project
 make
@@ -81,7 +100,7 @@ make
 make clean
 ```
 
-### Manual Compilation:
+#### Manual Compilation:
 ```bash
 g++ -std=c++11 -Wall -Werror -o food_delivery main.cpp MenuItem.cpp Restaurant.cpp Order.cpp USSDSystem.cpp
 ```
@@ -211,14 +230,25 @@ The system includes 10 popular restaurants in Harare:
 
 ```
 food-delivery-system/
-├── main.cpp              # Main program entry point
-├── MenuItem.h/.cpp       # Menu item class implementation
-├── Restaurant.h/.cpp     # Restaurant management
-├── Order.h/.cpp          # Order processing and tracking
-├── USSDSystem.h/.cpp     # USSD interface controller
-├── makefile              # Build configuration
-├── Report.md             # Detailed project documentation
-└── README.md             # This file
+├── Backend (C++)
+│   ├── main.cpp              # Main program entry point
+│   ├── makefile              # Build configuration
+│   ├── MenuItem.h/.cpp       # Menu item class implementation
+│   ├── Order.h/.cpp          # Order processing and tracking
+│   ├── Restaurant.h/.cpp     # Restaurant management
+│   └── USSDSystem.h/.cpp     # USSD interface controller
+├── Frontend (Web)
+│   ├── index.html            # iPhone 16-styled mobile UI
+│   ├── styles.css            # Modern iOS styling
+│   └── app.js                # USSD logic simulation
+├── Documentation
+│   ├── README.md             # Main documentation (this file)
+│   ├── WEB_INTERFACE.md      # Web interface guide
+│   ├── demo.md               # Interactive demo guide
+│   └── Report.md             # Detailed technical report
+└── Build Files
+    ├── food_delivery         # Compiled executable
+    └── *.o                   # Object files
 ```
 
 ## 🌍 Real-World Impact

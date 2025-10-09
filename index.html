@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>USSD Food Delivery - Mobile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="phone-container">
+        <!-- iPhone 16 Frame -->
+        <div class="iphone-frame">
+            <!-- Dynamic Island -->
+            <div class="dynamic-island"></div>
+            
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="time" id="currentTime">9:41</span>
+                </div>
+                <div class="status-right">
+                    <span class="signal">📶</span>
+                    <span class="wifi">📡</span>
+                    <span class="battery">🔋</span>
+                </div>
+            </div>
+
+            <!-- Screen Content -->
+            <div class="screen">
+                <!-- USSD Session Screen -->
+                <div id="ussdScreen" class="ussd-screen active">
+                    <div class="ussd-header">
+                        <h2>USSD</h2>
+                        <button class="close-btn" onclick="cancelSession()">✕</button>
+                    </div>
+                    
+                    <div class="ussd-content" id="ussdContent">
+                        <p class="ussd-message">Welcome to Food Delivery System</p>
+                        <p class="ussd-prompt">Enter USSD code to continue:</p>
+                    </div>
+                    
+                    <div class="ussd-input-area">
+                        <input type="text" id="ussdInput" class="ussd-input" placeholder="*0101#" readonly>
+                    </div>
+                    
+                    <div class="ussd-actions">
+                        <button class="ussd-btn cancel-btn" onclick="cancelSession()">Cancel</button>
+                        <button class="ussd-btn send-btn" onclick="sendUSSD()">Send</button>
+                    </div>
+                </div>
+
+                <!-- Dial Pad Screen -->
+                <div id="dialScreen" class="dial-screen">
+                    <div class="dial-display">
+                        <input type="text" id="dialInput" class="dial-input" placeholder="Enter USSD code" readonly>
+                    </div>
+                    
+                    <div class="dial-pad">
+                        <button class="dial-btn" onclick="dialPress('1')">
+                            <span class="number">1</span>
+                            <span class="letters"></span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('2')">
+                            <span class="number">2</span>
+                            <span class="letters">ABC</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('3')">
+                            <span class="number">3</span>
+                            <span class="letters">DEF</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('4')">
+                            <span class="number">4</span>
+                            <span class="letters">GHI</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('5')">
+                            <span class="number">5</span>
+                            <span class="letters">JKL</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('6')">
+                            <span class="number">6</span>
+                            <span class="letters">MNO</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('7')">
+                            <span class="number">7</span>
+                            <span class="letters">PQRS</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('8')">
+                            <span class="number">8</span>
+                            <span class="letters">TUV</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('9')">
+                            <span class="number">9</span>
+                            <span class="letters">WXYZ</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('*')">
+                            <span class="number">*</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('0')">
+                            <span class="number">0</span>
+                            <span class="letters">+</span>
+                        </button>
+                        <button class="dial-btn" onclick="dialPress('#')">
+                            <span class="number">#</span>
+                        </button>
+                    </div>
+                    
+                    <div class="dial-actions">
+                        <button class="action-btn" onclick="dialDelete()">
+                            <span class="icon">⌫</span>
+                        </button>
+                        <button class="action-btn call-btn" onclick="dialCall()">
+                            <span class="icon">📞</span>
+                        </button>
+                        <button class="action-btn" onclick="dialClear()">
+                            <span class="icon">✕</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Indicator -->
+            <div class="home-indicator"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
